@@ -6,8 +6,9 @@ use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithValidation;
+use Maatwebsite\Excel\Concerns\WithBatchInserts;
 
-class UsersImport implements ToModel, WithHeadingRow, WithValidation
+class UsersImport implements ToModel, WithHeadingRow, WithValidation, WithBatchInserts
 {
     /**
     * @param array $row
@@ -23,12 +24,18 @@ class UsersImport implements ToModel, WithHeadingRow, WithValidation
         ]);
     }
 
+    public function batchSize(): int
+    {
+        return 100;
+    }
+
     public function rules(): array
     {
         return [
-            'name' => 'required',
+            'name' => 'required|min:3',
             'email'=>'required|email|unique:users',
-            'password' => 'required',
+            'password' => 'required|min:5',
+
         ];
     }
 }
