@@ -22,6 +22,6 @@ Route::get('/', function () {
 // Route::get('import', [UserController::class, 'import']);
 // Route::post('file-import', [UserController::class, 'fileImport'])->name('file-import');
 
-Route::get('import', [DadosPagController::class, 'import']);
-Route::post('file-import', [DadosPagController::class, 'fileImport'])->name('file-import');
+Route::get('import', [DadosPagController::class, 'create']);
+Route::post('file-import', [DadosPagController::class, 'store'])->name('file-import');
 

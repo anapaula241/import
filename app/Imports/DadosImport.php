@@ -3,48 +3,55 @@
 namespace App\Imports;
 
 use App\Models\Dados_pag;
-use Maatwebsite\Excel\Concerns\ToModel;
-use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithValidation;
-use Maatwebsite\Excel\Concerns\WithBatchInserts;
+use Maatwebsite\Excel\Concerns\ToCollection;
+use Illuminate\Support\Collection;
 
-use Maatwebsite\Excel\Concerns\SkipsOnError;
 
-class DadosImport implements ToModel, WithHeadingRow, WithValidation, WithBatchInserts,SkipsOnError
+
+// use Illuminate\Contracts\Queue\ShouldQueue;
+class DadosImport implements ToCollection, WithHeadingRow, WithValidation
 {
+
     /**
     * @param array $row
     *
-    * @return \Illuminate\Database\Eloquent\Model|null
+
     */
-    public function model(array $row)
+    public function collection(Collection $rows)
     {
-        return new Dados_pag([
-            'nome'     => $row['nome'],
-            'cpf'    => $row['cpf'],
-            'agencia'    => $row['agencia'],
-            'conta'    => $row['conta'],
-        ]);
-    }
+
+            foreach ($rows as $row)
+            {
+                $dados= Dados_pag::create([
+                    'nome'     => $row['nome'],
+                    'cpf'    => $row['cpf'],
+                    'agencia'    => $row['agencia'],
+                    'conta'    => $row['conta'],
+                ]);
+            }
+        }
+
 
     public function rules(): array
     {
         return [
             'nome' => 'required|min:3',
             'cpf' => 'required|cpf',
-            'agencia' => 'required|min:4',
-            'conta' => 'required',
+            'agencia' => 'required|min:5',
+            'conta' => 'required|min:6',
         ];
     }
 
-    public function batchSize(): int
-    {
-        return 500;
-    }
+    // public function batchSize(): int
+    // {
+    //     return 500;
+    // }
 
-      public function onError(\Throwable $e)
-    {
-        // Handle the exception how you'd like.
-    }
-}
+    // public function onError(\Throwable $e)
+    // {
+    //     // Handle the exception how you'd like.
+    // }
+
+  }

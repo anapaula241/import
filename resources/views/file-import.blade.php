@@ -18,11 +18,15 @@
         <form action="{{ route('file-import') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
-                @if (isset($errors) && $errors->any())
+                @if ($errors->any())
                 <div class="alert alert-danger" role="alert">
-                    @foreach ($errors->all() as $error)
-                    {{$error}}
-                    @endforeach
+                    <ol>
+                        @foreach ($errors->all() as $error)
+                        <li>{{$error}}</li>
+
+                        @endforeach
+                    </ol>
+
                 </div>
                 @endif
 
