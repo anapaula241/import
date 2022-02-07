@@ -35,15 +35,18 @@
                       <div class="col-md-12 col-md-offset-1">
                         <div class="alert alert-success alert-dismissible">
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
-                            <h5>{!! Session::get('success') !!}</h5>
+                            <i class="fas fa-check-circle"></i> <h5>{!! Session::get('success') !!}</h5>
                         </div>
                       </div>
                     </div>
                 @endif
 
-                <input type="file" name="file" class="form-control">
+                <div class="form-group">
+                    <input type="file" name="file" placeholder="Choose file" >
+                </div>
+                {{-- <input type="file" name="file" class="form-control col"> --}}
                 <br>
-                <button class="btn btn-success">Importar Dados</button>
+                <button class="btn btn-success ">Importar Dados</button>
         </form>
         </div>
     </div>

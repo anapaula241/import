@@ -30,8 +30,8 @@ class DadosObserver
      */
     public function created(Dados_pag $dados_pag)
     {
-        // $num=1;
-        // $dados_pag->lote += $dados_pag->lote + $num;
+
+         $dados_pag->lote += $dados_pag->lote ;
         $dados_pag->status = 1;
         $dados_pag->save();
 
