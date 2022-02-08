@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DadosPagController;
+use App\Http\Controllers\GeraArquivoController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -19,9 +20,8 @@ Route::get('/', function () {
     return view('file-import');
 });
 
-// Route::get('import', [UserController::class, 'import']);
-// Route::post('file-import', [UserController::class, 'fileImport'])->name('file-import');
 
 Route::get('import', [DadosPagController::class, 'create']);
 Route::post('file-import', [DadosPagController::class, 'store'])->name('file-import');
+Route::post('cria_arquivo', [GeraArquivoController::class, 'cria_arquivo'])->name('cria_arquivo');
 
