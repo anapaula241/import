@@ -50,9 +50,10 @@ class DadosPagController extends Controller
         {
             $flag=0;
             $totrem=0;
-
+            // $select = mysql_query("SELECT left(nome,30), left (cpf,11), left (agencia,5), left (conta,9) FROM portalpesquisa.tab_financeiro order by nome") or die(mysql_error());
             $select = DB :: select ("SELECT left(nome,30), left (cpf,11), left (agencia,5), left (conta,9) FROM dados_pags order by nome");
 dd($select);
+// if(mysql_num_rows($select))
             if(count($select))
             {
                             //variável de 20 espaços
@@ -78,6 +79,7 @@ dd($select);
 
 
                             //gerando arquivo
+                // while ($linha = mysql_fetch_array($select))
                 while ($linha = $select)
                     { echo $linha[0];
                         $nome=$linha[0];
@@ -134,7 +136,9 @@ dd($select);
 
                                 fclose($abrir);
                             }
+                            dd($arquivo);
                             return $arquivo;
+
                         }
                         else return 0;
                         } //fim da funçã
