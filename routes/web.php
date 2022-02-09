@@ -23,5 +23,5 @@ Route::get('/', function () {
 
 Route::get('import', [DadosPagController::class, 'create']);
 Route::post('file-import', [DadosPagController::class, 'store'])->name('file-import');
-Route::post('cria_arquivo', [GeraArquivoController::class, 'cria_arquivo'])->name('cria_arquivo');
+Route::get('cria_arquivo', [DadosPagController::class, 'cria_arquivo'])->name('cria_arquivo');
 

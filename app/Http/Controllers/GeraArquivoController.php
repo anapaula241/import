@@ -43,7 +43,7 @@ class GeraArquivoController extends Controller
 
 
 					//gerando arquivo
-		while ($linha = array($select))
+		while ($linha = $select)
 			{ echo $linha[0];
 				$nome=$linha[0];
 				$nome=str_pad($nome,30);
