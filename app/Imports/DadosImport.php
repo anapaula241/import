@@ -14,6 +14,11 @@ use Illuminate\Support\Collection;
 class DadosImport implements ToCollection, WithHeadingRow, WithValidation
 {
 
+    public function  __construct($lote)
+    {
+        $this->lote= $lote;
+    }
+
     /**
     * @param array $row
     *
@@ -22,9 +27,12 @@ class DadosImport implements ToCollection, WithHeadingRow, WithValidation
     public function collection(Collection $rows)
     {
 
+
             foreach ($rows as $row)
             {
-                $dados= Dados_pag::create([
+                Dados_pag::create([
+                    // Answer::create([
+                    'lote' => $this->lote,
                     'nome'     => $row['nome'],
                     'cpf'    => $row['cpf'],
                     'agencia'    => $row['agencia'],
@@ -43,6 +51,8 @@ class DadosImport implements ToCollection, WithHeadingRow, WithValidation
             'conta' => 'required|min:6',
         ];
     }
+
+
 
     // public function batchSize(): int
     // {

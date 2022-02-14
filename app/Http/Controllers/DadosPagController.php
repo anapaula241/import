@@ -22,10 +22,11 @@ class DadosPagController extends Controller
         //
     }
 
-    public function create()
-{
-    return view('file-import');
-}
+    public function create(){
+
+        return view('file-import');
+
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -34,9 +35,12 @@ class DadosPagController extends Controller
      */
     public function store(Request $request)
     {
-        Excel::import(new DadosImport, request()->file('file'));
+        $ultimolote= Dados_pag::max('lote');
+        $lote=$ultimolote + 1;
 
-         return back()->with('success', 'Dados foram Importados com Sucesso .');
+        Excel::import(new DadosImport($lote), request()->file('file'));
+
+        return back()->with('success', 'Dados foram Importados com Sucesso .');
     }
 
     /**

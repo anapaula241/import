@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+// use Illuminate\Support\Facades\DB;
 
 class Dados_pag extends Model
 {
@@ -26,4 +27,15 @@ class Dados_pag extends Model
         'status',
     ];
 
+    // public function setLoteAttribute($value)
+    // {
+    //     // $ultimolote= Dados_pag::max('lote');
+    //     // $value=$ultimolote;
+    //     $num=1;
+    //     $this->attributes['lote'] = $value + $num;
+    // }
 }
+
+
+
+

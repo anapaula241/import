@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\Dados_pag;
+use Illuminate\Support\Facades\DB;
 
 class DadosObserver
 {
@@ -21,6 +22,8 @@ class DadosObserver
         $dados_pag->agencia = trim($dados_pag->agencia);
         $dados_pag->conta = preg_replace("/[^a-zA-Z0-9]+/", "",   $dados_pag->conta);
         $dados_pag->conta = trim($dados_pag->conta);
+
+
     }
     /**
      * Handle the Dados_pag "created" event.
@@ -31,7 +34,8 @@ class DadosObserver
     public function created(Dados_pag $dados_pag)
     {
 
-         $dados_pag->lote += $dados_pag->lote ;
+        // $ultimo = DB::select('select MAX(lote) from dados_pags');
+        // $dados_pag->lote = $ultimo + 2;
         $dados_pag->status = 1;
         $dados_pag->save();
 

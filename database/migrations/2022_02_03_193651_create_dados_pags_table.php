@@ -20,7 +20,7 @@ class CreateDadosPagsTable extends Migration
             $table->string('agencia');
             $table->string('conta');
             $table->string('banco')->default('001');
-            $table->integer('lote')->default(1);
+            $table->integer('lote')->nullable();
             $table->integer('status')->nullable();
             $table->timestamps();
         });
