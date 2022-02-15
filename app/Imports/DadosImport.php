@@ -22,7 +22,6 @@ class DadosImport implements ToCollection, WithHeadingRow, WithValidation
     /**
     * @param array $row
     *
-
     */
     public function collection(Collection $rows)
     {
@@ -30,7 +29,7 @@ class DadosImport implements ToCollection, WithHeadingRow, WithValidation
 
             foreach ($rows as $row)
             {
-                Dados_pag::create([
+               $dados= Dados_pag::create([
                     // Answer::create([
                     'lote' => $this->lote,
                     'nome'     => $row['nome'],

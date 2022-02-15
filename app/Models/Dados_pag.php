@@ -8,6 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 // use Illuminate\Support\Facades\DB;
 
+
 class Dados_pag extends Model
 {
     use HasApiTokens, HasFactory, Notifiable;
