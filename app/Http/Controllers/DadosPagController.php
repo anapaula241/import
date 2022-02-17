@@ -24,7 +24,7 @@ class DadosPagController extends Controller
     {
 
         // $dados = Dados_pag::all();
-        $dadoss= Dados_pag::select('nome', 'cpf', 'agencia', 'conta','lote', 'created_at');
+        $dadoss= Dados_pag::select('nome', 'cpf', 'agencia', 'conta','lote', 'created_at', 'id');
         $dados = $dadoss->groupBy('lote')->get();
         return view('arquivotxt', compact('dados'));
     }
@@ -175,7 +175,7 @@ $dados = Dados_pag::where('lote', $lote)->get();
             }
 
             // return Storage::download('/public/arquivos'.$linha->lote. ".txt");
-            return back()->with('success', 'Arquivo foi Criado com Sucesso .');
+            return back()->with('message', 'Arquivo foi Criado com Sucesso .');
 
 
         } else return 0;
