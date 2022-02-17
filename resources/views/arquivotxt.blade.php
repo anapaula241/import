@@ -9,14 +9,24 @@
     <style>
 
 
+.titulo {
 
-  .titulo {
-    font-family: 'Spectral', 'Georgia';
-    line-height: 1.2;
-    font-size: 1.8rem;
+line-height: 1.2;
+font-size: 1.8rem;
 
-  }
+}
 
+
+
+.titulo::after {
+content: '';
+display: block;
+/* background: #d8d8d8; */
+ background: #d8d8d8;
+height: 0.4rem;
+width: 2.5rem;
+border-radius: 0.2rem;
+}
 
 
 
@@ -32,7 +42,7 @@
             <strong > Criar Arquivo txt</strong>
         </div>
         <div class="card-body">
-        <form  >
+        <form >
                 @csrf
 
                 @if ($errors->any())
@@ -84,18 +94,24 @@
                   <tr >
                     <td>{{ $dado->id}}</td>
                     <td>{{ $dado->lote}}</td>
-                    <td>{{ $dado->created_at}}</td>
+                    <td>{{ $dado->created_at->format('d/m/Y')}}</td>
 
                     <td>
-                        <a class="btn btn-success btn-sm" href="{{url('arquivo/'.$dado->lote ) }}" >  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-filetype-txt" viewBox="0 0 16 16">
+                        <a  class="btn btn-success btn-sm" type="button" id="arquivo" href="{{url('arquivo/'.$dado->lote ) }}" >  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-filetype-txt" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M14 4.5V14a2 2 0 0 1-2 2h-2v-1h2a1 1 0 0 0 1-1V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v9H2V2a2 2 0 0 1 2-2h5.5L14 4.5ZM1.928 15.849v-3.337h1.136v-.662H0v.662h1.134v3.337h.794Zm4.689-3.999h-.894L4.9 13.289h-.035l-.832-1.439h-.932l1.228 1.983-1.24 2.016h.862l.853-1.415h.035l.85 1.415h.907l-1.253-1.992 1.274-2.007Zm1.93.662v3.337h-.794v-3.337H6.619v-.662h3.064v.662H8.546Z"/>
                           </svg>  Criar Arquivo </a>
                     </td>
                     <td>
-                        <a class="btn btn-primary btn-sm"  href="{{ url('download/'.$dado->lote) }}" >  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16 fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                        {{-- {{$dado->status}} --}}
+                        @if ($dado->status == 1)
+
+                        <a class="btn btn-primary btn-sm" id="download"  href="{{ url('download/'.$dado->lote) }}" >  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16 fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
                             <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
                             <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
                           </svg>  Download </a>
+
+@endif
+
                     </td>
                   </tr>
                   <?php endforeach;?>
@@ -127,9 +143,15 @@
 
 <script>
 
-$("#img").change(function(){
-  $("#btnEnvia").attr("disabled", false);
-});
+// $("#arquivo").change(function(){
+//   $("#download").attr("disabled", false);
+// });
+
+$("#arquivo").click( function() {
+
+    $("#download").fadeIn("slow");
+
+    });
 
 </script>
 </html>

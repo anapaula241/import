@@ -11,7 +11,7 @@
 
 
   .titulo {
-    font-family: 'Spectral', 'Georgia';
+
     line-height: 1.2;
     font-size: 1.8rem;
 

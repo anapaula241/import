@@ -24,7 +24,7 @@ class DadosPagController extends Controller
     {
 
         // $dados = Dados_pag::all();
-        $dadoss= Dados_pag::select('nome', 'cpf', 'agencia', 'conta','lote', 'created_at', 'id');
+        $dadoss= Dados_pag::select('nome', 'cpf', 'agencia', 'conta','lote', 'created_at', 'id', 'status');
         $dados = $dadoss->groupBy('lote')->get();
         return view('arquivotxt', compact('dados'));
     }
@@ -69,6 +69,16 @@ class DadosPagController extends Controller
 
   function cria_arquivo($lote)
     {
+
+    $status =Dados_pag::where('lote', $lote)
+    ->update(['status' => 1]);
+
+if(!$status){
+    return back()->withErrors('Não foi possível realizar');
+}
+
+
+
         $flag = 0;
         $totrem = 0;
 

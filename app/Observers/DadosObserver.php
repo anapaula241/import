@@ -35,7 +35,7 @@ class DadosObserver
     public function created(Dados_pag $dados_pag)
     {
 
-        $dados_pag->status = 1;
+        $dados_pag->status = 0;
         $dados_pag->save();
 
     }
