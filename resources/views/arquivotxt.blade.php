@@ -19,16 +19,6 @@
 
 
 
-  .titulo::after {
-    content: '';
-    display: block;
-    /* background: #d8d8d8; */
-     background: #d8d8d8;
-    height: 0.4rem;
-    width: 2.5rem;
-    border-radius: 0.2rem;
-  }
-
 
 </style>
 
@@ -39,10 +29,10 @@
     <div class="container mt-5">
         <div class="card bg-light mt-5">
         <div class="card-header titulo ">
-            <strong > Importar Dados</strong>
+            <strong > Criar Arquivo txt</strong>
         </div>
         <div class="card-body">
-        <form action="{{ route('file-import') }}" method="POST" enctype="multipart/form-data">
+        <form  >
                 @csrf
 
                 @if ($errors->any())
@@ -76,19 +66,49 @@
                     </div>
                 @endif
 
-                <div class="form-group">
-                    <input type="file" name="file" id="img" placeholder="Choose file" >
-                </div>
+             <h6>Relação de lotes</h6>
+            <table class="table table-striped col-md-10">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">Lote</th>
+                    <th scope="col">Data/Hora da criação</th>
+
+                    <th scope="col" colspan="2" class="text-center">Ações</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                  <?php  foreach($dados as $dado): ?>
+
+                  <tr >
+                    <td>{{ $dado->lote}}</td>
+                    <td>{{ $dado->created_at}}</td>
+
+                    <td>
+                        <a class="btn btn-success btn-sm" href="{{url('arquivo/'.$dado->lote ) }}" >  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-filetype-txt" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M14 4.5V14a2 2 0 0 1-2 2h-2v-1h2a1 1 0 0 0 1-1V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v9H2V2a2 2 0 0 1 2-2h5.5L14 4.5ZM1.928 15.849v-3.337h1.136v-.662H0v.662h1.134v3.337h.794Zm4.689-3.999h-.894L4.9 13.289h-.035l-.832-1.439h-.932l1.228 1.983-1.24 2.016h.862l.853-1.415h.035l.85 1.415h.907l-1.253-1.992 1.274-2.007Zm1.93.662v3.337h-.794v-3.337H6.619v-.662h3.064v.662H8.546Z"/>
+                          </svg>  Criar Arquivo </a>
+                    </td>
+                    <td>
+                        <a class="btn btn-primary btn-sm"  href="{{ url('download/'.$dado->lote) }}" >  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16 fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                            <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                          </svg>  Download </a>
+                    </td>
+                  </tr>
+                  <?php endforeach;?>
+
+                </tbody>
+              </table>
+
+
                 {{-- <input type="file" name="file" class="form-control col"> --}}
                 <br>
-                <button class="btn btn-success mr-2 btn-sm" name="btnEnvia" id="btnEnvia" disabled="true"  >  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-cloud-arrow-down" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M7.646 10.854a.5.5 0 0 0 .708 0l2-2a.5.5 0 0 0-.708-.708L8.5 9.293V5.5a.5.5 0 0 0-1 0v3.793L6.354 8.146a.5.5 0 1 0-.708.708l2 2z"/>
-                    <path d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z"/>
-                  </svg> Importar Dados</button>
 
-                  <a class="btn btn-success btn-sm"  href="{{ route('arquivo') }}" >  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-filetype-txt" viewBox="0 0 16 16">
+
+                  {{-- <a class="btn btn-success"  href="{{ route('cria_arquivo') }}" >  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-filetype-txt" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M14 4.5V14a2 2 0 0 1-2 2h-2v-1h2a1 1 0 0 0 1-1V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v9H2V2a2 2 0 0 1 2-2h5.5L14 4.5ZM1.928 15.849v-3.337h1.136v-.662H0v.662h1.134v3.337h.794Zm4.689-3.999h-.894L4.9 13.289h-.035l-.832-1.439h-.932l1.228 1.983-1.24 2.016h.862l.853-1.415h.035l.85 1.415h.907l-1.253-1.992 1.274-2.007Zm1.93.662v3.337h-.794v-3.337H6.619v-.662h3.064v.662H8.546Z"/>
-                  </svg>Criar Arquivo </a>
+                  </svg>Criar Arquivo </a> --}}
         </form>
 
         </div>

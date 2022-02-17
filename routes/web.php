@@ -21,7 +21,10 @@ Route::get('/', function () {
 });
 
 
+
 Route::get('import', [DadosPagController::class, 'create']);
 Route::post('file-import', [DadosPagController::class, 'store'])->name('file-import');
-Route::get('cria_arquivo', [DadosPagController::class, 'cria_arquivo'])->name('cria_arquivo');
-
+Route::get('arquivo/{lote}', [DadosPagController::class, 'cria_arquivo'])->name('cria_arquivo');
+Route::get('arquivo', [DadosPagController::class, 'index'])->name('arquivo');
+// Route::get('arquivotxt/{lote}', [DadosPagController::class, 'cria_arquivo'])->name('arquivotxt');
+Route::get('download/{lote}', [DadosPagController::class, 'download'])->name('download');
