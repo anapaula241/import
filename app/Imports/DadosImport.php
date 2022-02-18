@@ -8,37 +8,32 @@ use Maatwebsite\Excel\Concerns\WithValidation;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Illuminate\Support\Collection;
 
-
-
-// use Illuminate\Contracts\Queue\ShouldQueue;
 class DadosImport implements ToCollection, WithHeadingRow, WithValidation
 {
 
     public function  __construct($lote)
     {
-        $this->lote= $lote;
+        $this->lote = $lote;
     }
 
     /**
-    * @param array $row
-    *
-    */
+     * @param array $row
+     *
+     */
     public function collection(Collection $rows)
     {
 
-
-            foreach ($rows as $row)
-            {
-               $dados= Dados_pag::create([
-                    // Answer::create([
-                    'lote' => $this->lote,
-                    'nome'     => $row['nome'],
-                    'cpf'    => $row['cpf'],
-                    'agencia'    => $row['agencia'],
-                    'conta'    => $row['conta'],
-                ]);
-            }
+        foreach ($rows as $row) {
+            $dados = Dados_pag::create([
+                // Answer::create([
+                'lote' => $this->lote,
+                'nome'     => $row['nome'],
+                'cpf'    => $row['cpf'],
+                'agencia'    => $row['agencia'],
+                'conta'    => $row['conta'],
+            ]);
         }
+    }
 
 
     public function rules(): array
@@ -50,17 +45,4 @@ class DadosImport implements ToCollection, WithHeadingRow, WithValidation
             'conta' => 'required|min:6',
         ];
     }
-
-
-
-    // public function batchSize(): int
-    // {
-    //     return 500;
-    // }
-
-    // public function onError(\Throwable $e)
-    // {
-    //     // Handle the exception how you'd like.
-    // }
-
-  }
+}
