@@ -41,8 +41,7 @@ class DadosImport implements ToCollection, WithHeadingRow, WithValidation
         return [
             'nome' => 'required|min:3',
             'cpf' => 'required|cpf|unique:dados_pags,cpf',
-            'agencia' => 'required|min:4',
-            'conta' => 'required|min:6',
+
         ];
     }
 }

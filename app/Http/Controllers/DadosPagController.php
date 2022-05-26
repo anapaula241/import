@@ -93,7 +93,8 @@ class DadosPagController extends Controller
             foreach ($dados as $linha) {
 
                 $nome = $linha->nome;
-                $nome = substr(Str::padRight($nome, 30), 0, 29);
+                $nome = substr(Str::padRight($nome, 30), 0, 30);
+                // $nome = Str::padRight($nome, 30);
                 $cpf = $linha->cpf;
 
                 //acrescendo zeros ao valor
@@ -115,7 +116,7 @@ class DadosPagController extends Controller
                 }
 
                 //acrescendo zeros à conta
-                $conta = $linha->agencia;
+                $conta = $linha->conta;
                 $num = Str::length($conta);
                 while ($num < 12) {
                     $conta = "0" . $conta;
